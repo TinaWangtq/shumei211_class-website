@@ -9,8 +9,25 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #E6F0FF; /* 淡蓝色 */
+            /*background-color: #E6F0FF; /* 淡蓝色 */
         }
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://github.com/TinaWangtq/shumei211_class-website/blob/master/%E5%AD%A6%E6%A0%A1%E5%9B%BE%E7%89%87.jpg?raw=true'); /* 替换为您的图片链接 */
+            background-size: cover;
+            opacity: 0.4; /* 设置透明度为40% */
+            z-index: -1; /* 将底板置于最底层 */
+        }/*给网页加一个学校图片的背景*/
+
+
+
+
+
         header {
             background-color: #333;
             color: white;
@@ -36,22 +53,42 @@
             height: 50px;
         }
         .main-title {
-    font-size: 2rem; /* 相对于根元素的字体大小的两倍 */
-    font-weight: bold; /* 加粗文字 */
-    margin-left: -150px;
-}
+        font-size: 2rem; /* 相对于根元素的字体大小的两倍 */
+        font-weight: bold; /* 加粗文字 */
+        margin-left: -150px;
+        }
+
+
+
+/*照片轮播效果*/
+        #slideshow {
+            width: 100%; /* 容器宽度 */
+            height: 500px; /* 容器高度 */
+            overflow: hidden; /* 隐藏溢出部分 */
+            position: relative; /* 相对定位，用于居中显示图片 */
+        }
+
+        #slideshow img {
+            width: 100%; /* 图片宽度填满容器 */
+            height: auto; /* 图片高度自适应，保持比例不变 */
+            object-fit: cover; /* 图片填充容器，保持比例不变 */
+            position: absolute; /* 绝对定位，用于居中显示图片 */
+            top: 50%; /* 图片顶部距离容器顶部的距离为容器高度的一半 */
+            left: 50%; /* 图片左侧距离容器左侧的距离为容器宽度的一半 */
+            transform: translate(-50%, -50%); /* 将图片向左上角移动，实现居中效果 */
+            transition: opacity 0.1s ease; /* 添加过渡效果 */
+        }
 
 
 
 
-        
         .section {
            /* margin-top: 20px;
             text-align: center;*/
-            max-width: 80%; /* 图片宽度不超过其包含元素的宽度 */
+            max-width: 60%; /* 图片宽度不超过其包含元素的宽度 */
             display: block; /* 让图片居中显示 */
             margin: 0 auto; /* 让图片水平居中 */
-        }
+        }/*班级合照*/
         .section-title {
             font-size: 20px;
             margin-bottom: 10px;
@@ -183,10 +220,10 @@
 
 
         .news-link {
-    color: inherit; /* 继承父元素的文字颜色 */
-    text-decoration: inherit; /* 继承父元素的文本装饰 */
-    /* 可以根据需要添加其他样式，如字体大小等 */
-}
+        color: inherit; /* 继承父元素的文字颜色 */
+        text-decoration: inherit; /* 继承父元素的文本装饰 */
+        /* 可以根据需要添加其他样式，如字体大小等 */
+        }
 
 
 
@@ -194,6 +231,11 @@
     </style>
 </head>
 <body>
+
+   <!--加上背景的那张学校图片-->
+    <div id="background"></div>
+
+
     <header>
         <div class="logo">
             <img src="https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/logo_xuexiao.png?raw=true" alt="School Logo">
@@ -223,8 +265,42 @@
 
 
     <section class="section">
-        <img src="https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E7%8F%AD%E7%BA%A7%E5%90%88%E7%85%A7.jpg?raw=true" alt="班级合照" style="max-width: 100%;">
+        <!-- 班级合照轮播区域 -->
+        <div id="slideshow">
+            <img src="https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E7%8F%AD%E7%BA%A7%E5%90%88%E7%85%A7.jpg?raw=true" alt="班级合照" style="max-width: 100%;">
+        </div>
     </section>
+
+    <!-- JavaScript 代码 -->
+    <script>
+        // 图片轮播功能
+        const slideshow = document.getElementById('slideshow');
+        const images = [
+            'https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E7%8F%AD%E7%BA%A7%E5%90%88%E7%85%A7.jpg?raw=true',
+            "https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E7%8F%AD%E7%BA%A7%E5%90%88%E7%85%A72.jpg?raw=true", // 添加更多图片链接
+            'https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E6%B8%B8%E6%88%8F1.jpg?raw=true',
+            'https://github.com/TinaWangtq/shumei211_class-website/blob/master/images/%E7%8F%AD%E4%BC%9A1.jpg?raw=true'
+        ];
+        let currentIndex = 0;
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            slideshow.innerHTML = `<img src="${images[currentIndex]}" alt="班级合照">`;
+        }
+
+        // 每隔一定时间切换图片
+        setInterval(nextSlide, 3000); // 切换间隔为 3 秒（3000 毫秒）
+    </script>
+
+
+
+
+
+
+
+
+
+
 
     <div class="grid-container">
 
@@ -277,12 +353,12 @@
         <div class="grid-container">
             <div class="grid-item">
                 <div class="news-container">
-                    <h2 class="section-title">班级风采</h2>
+                    <h2 class="section-title">思想建设</h2>
                     <hr class="divider">
                     <div class="news-content">
-                        <p><a href="link_to_news_1" class="news-link">学校召开重温习近平总书记“3·18”重要讲话座谈会</a></p>
-                        <p><a href="https://www.cuit.edu.cn/info/1072/52505.htm" class="news-link">成都信息工程大学党委理论学习中心组举行集体学习会</a></p>
-                        <p><a href="link_to_news_3" class="news-link">沈火明带队赴新华三集团走访调研</a></p>
+                        <p><a href="https://user.qzone.qq.com/1397246883" class="news-link">3月团课——习近平新时代中国特色社会主义思想</a></p>
+                        <p><a href="https://user.qzone.qq.com/1397246883" class="news-link">12月团课——学习宪法知识，主力强军目标</a></p>
+                        <p><a href="https://user.qzone.qq.com/1397246883" class="news-link">5月团课——习近平总书记五四重要回信 </a></p>
                         <!-- 添加更多新闻标题及链接 -->
                     </div>
                 </div>
